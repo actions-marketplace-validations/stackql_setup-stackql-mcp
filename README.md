@@ -1,6 +1,30 @@
-[![setup stackql mcp test](https://github.com/stackql/setup-stackql-mcp/actions/workflows/setup-stackql-mcp-test.yml/badge.svg)](https://github.com/stackql/setup-stackql-mcp/actions/workflows/setup-stackql-mcp-test.yml)
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Setup%20StackQL%20MCP-blue?logo=github)](https://github.com/marketplace/actions/setup-stackql-mcp-server)
-[![StackQL](https://stackql.io/img/stackql-logo-bold.png)](https://github.com/stackql/stackql)
+[stars]: https://img.shields.io/github/stars/stackql/stackql?style=flat-square "GitHub Stars"
+[logo]: https://stackql.io/img/stackql-logo-bold.png "stackql logo"
+[stackql]: https://github.com/stackql/stackql
+[homepage]: https://stackql.io/
+[downloads]: https://img.shields.io/github/downloads/stackql/stackql/total?label=github%20downloads
+[mcpregistry]: https://registry.modelcontextprotocol.io/?search=stackql
+[mcptoplist]: https://mcptoplist.com/server/io.github.stackql%2Fstackql-mcp
+[npmjsmcpregistry]: https://www.npmjs.com/package/@stackql/mcp-server
+[mcptoplistbadge]: https://mcptoplist.com/badge/io.github.stackql%2Fstackql-mcp.svg "MCP Toplist"
+[mcpregistrybadge]: https://img.shields.io/badge/MCP%20Registry-io.github.stackql%2Fstackql--mcp-blue?style=flat-square "MCP Registry"
+[mcpserver]: https://img.shields.io/npm/v/@stackql/mcp-server?style=flat-square&label=mcp%20server "MCP Server"
+
+<div align="center">
+
+[![logo]][homepage]  
+
+[![Marketplace](https://img.shields.io/badge/Marketplace-setup--stackql--mcp-blue?logo=github)](https://github.com/marketplace/actions/setup-stackql-mcp)
+[![Release](https://img.shields.io/github/v/release/stackql/setup-stackql-mcp)](https://github.com/stackql/setup-stackql-mcp/releases)
+[![CI](https://github.com/stackql/setup-stackql-mcp/actions/workflows/setup-stackql-mcp-test.yml/badge.svg)](https://github.com/stackql/setup-stackql-mcp/actions/workflows/setup-stackql-mcp-test.yml)
+[![License](https://img.shields.io/github/license/stackql/setup-stackql-mcp)](LICENSE)
+![downloads]
+[![MCP Toplist][mcptoplistbadge]][mcptoplist]
+[![MCP Registry][mcpregistrybadge]][mcpregistry]
+[![MCP Server][mcpserver]][npmjsmcpregistry]
+[![stars]][stackql]
+
+</div>
 
 # setup-stackql-mcp
 
@@ -39,7 +63,7 @@ Two forms of the same config, for two consumption styles. The emitted JSON nests
 
 The action also exports `STACKQL_MCP_BIN` to the job env (the [`@stackql/mcp-server`](https://www.npmjs.com/package/@stackql/mcp-server) npm and [`stackql-mcp-server`](https://pypi.org/project/stackql-mcp-server/) PyPI wrappers detect it and skip their own download) and adds the install dir to `PATH`.
 
-It runs on `ubuntu-latest`, `windows-latest`, and `macos-latest` runners (linux-x64, linux-arm64, windows-x64, darwin-universal).
+It runs on Linux, Windows and macOS runners, including `windows-11-arm` (linux-x64, linux-arm64, windows-x64, windows-arm64, darwin-universal). Windows ARM64 runners select the native bundle using `RUNNER_ARCH`, even when Python runs under x64 emulation. Native Windows ARM64 bundles require StackQL v0.12.778 or later.
 
 ## Quick start
 
@@ -134,7 +158,7 @@ jobs:
   cost:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: echo '${{ secrets.GCP_SA_KEY }}' > /tmp/sa.json
       - id: stackql
         uses: stackql/setup-stackql-mcp@v1
